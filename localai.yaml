@@ -1,0 +1,26 @@
+services:
+  localai:
+    # CPU mode (default)
+    image: localai/localai:latest-aio-cpu
+    # GPU mode: comment the line above and uncomment the line below
+    # image: localai/localai:latest-aio-gpu-nvidia-cuda-12
+    container_name: localai
+    restart: always
+    ports:
+      - "8181:8080"
+    environment:
+      - MODELS_PATH=/models
+      - THREADS=8
+      - DEBUG=false
+    volumes:
+      - /home/YOUR_USERNAME/homelab/data/localai/models:/models
+      - /home/YOUR_USERNAME/homelab/containers/localai/config:/config
+
+    # GPU mode: uncomment the entire deploy block below when using the GPU image
+    # deploy:
+    #   resources:
+    #     reservations:
+    #       devices:
+    #         - driver: nvidia
+    #           count: all
+    #           capabilities: [gpu]

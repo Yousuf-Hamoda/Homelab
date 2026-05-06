@@ -1,0 +1,20 @@
+networks:
+  cloudflare:
+    external: true
+
+services:
+  kavita:
+    image: jvmilazz0/kavita:latest
+    container_name: kavita
+    volumes:
+      - /home/YOUR_USERNAME/homelab/data/manga:/manga
+      - /home/YOUR_USERNAME/homelab/data/comics:/comics
+      - /home/YOUR_USERNAME/homelab/data/books:/books
+      - /home/YOUR_USERNAME/homelab/containers/kavita:/kavita/config   # /kavita/config must not be changed
+    environment:
+      - TZ=America/Toronto   # Change to your timezone: https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+    ports:
+      - "5000:5000"
+    restart: unless-stopped
+    networks:
+      - cloudflare

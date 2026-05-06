@@ -1,0 +1,16 @@
+services:
+  code-server:
+    stdin_open: true
+    tty: true
+    container_name: code-server
+    ports:
+      - 8443:8080
+    volumes:
+      - /home/sofa/.local:/home/coder/.local
+      - /home/sofa/.config:/home/coder/.config
+      - /home/sofa/Code:/home/coder/project
+    user: 1000:1000
+    environment:
+      - DOCKER_USER=sofa
+    image: codercom/code-server:latest
+    restart: unless-stopped

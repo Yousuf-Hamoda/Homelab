@@ -1,0 +1,19 @@
+networks:
+  cloudflare:
+    external: true
+
+services:
+  audiobookshelf:
+    image: ghcr.io/advplyr/audiobookshelf:latest
+    ports:
+      - 13378:80
+    volumes:
+      - /home/YOUR_USERNAME/homelab/data/audiobooks:/audiobooks
+      - /home/YOUR_USERNAME/homelab/data/podcasts:/podcasts
+      - /home/YOUR_USERNAME/homelab/containers/audiobookshelf/config:/config
+      - /home/YOUR_USERNAME/homelab/containers/audiobookshelf/metadata:/metadata
+    environment:
+      - TZ=America/Toronto   # Change to your timezone: https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+    restart: unless-stopped
+    networks:
+      - cloudflare

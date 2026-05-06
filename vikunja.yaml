@@ -1,0 +1,22 @@
+networks:
+  cloudflare:
+    external: true
+
+services:
+  vikunja:
+    image: vikunja/vikunja
+    environment:
+      VIKUNJA_SERVICE_PUBLICURL: ${VIKUNJA_SERVICE_PUBLICURL}   # Change to your server IP or domain
+      VIKUNJA_DATABASE_PATH: /db/vikunja.db
+      VIKUNJA_DATABASE_TYPE: sqlite
+      VIKUNJA_SERVICE_JWTSECRET: ${VIKUNJA_SERVICE_JWTSECRET}   # Generate with: openssl rand -hex 32
+    ports:
+      - 3456:3456
+    volumes:
+      - /home/YOUR_USERNAME/homelab/containers/vikunja/files:/app/vikunja/files
+      - /home/YOUR_USERNAME/homelab/containers/vikunja/db:/db
+    restart: unless-stopped
+    networks:
+      - cloudflare
+    env_file:
+      - vikunja.env
