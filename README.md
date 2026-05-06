@@ -15,6 +15,7 @@ A collection of self-hosted services managed via [Portainer](https://www.portain
 | [LocalAI](#localai) | Local LLM inference server (OpenAI-compatible API) | 8181 |
 | [Vikunja](#vikunja) | Open-source to-do & project management app | 3456 |
 | [VS Code Server](#vs-code-server) | Browser-based VS Code via code-server | 8443 |
+| [Metabase](#metabse) | Self-hosted local Metabase using PostgreSQL | 5432 |
 
 ---
 
@@ -112,16 +113,7 @@ A self-hosted audiobook and podcast server with iOS/Android apps for streaming o
 A full-featured self-hosted photo and video backup solution — a true Google Photos replacement with face recognition, albums, and mobile apps.
 
 - **URL:** `http://YOUR_SERVER_IP:2283`
-- **Requires:** A `stack.env` file — in Portainer, add these under **Environment variables** or use the **stack.env** option:
-
-```env
-UPLOAD_LOCATION=/home/YOUR_USERNAME/homelab/data/immich
-DB_DATA_LOCATION=/home/YOUR_USERNAME/homelab/data/immich-db
-DB_PASSWORD=CHANGE_ME_STRONG_PASSWORD
-DB_USERNAME=immich
-DB_DATABASE_NAME=immich
-IMMICH_VERSION=release
-```
+- **Requires:** A `stack.env` file — in Portainer
 
 > Generate a strong DB password with: `openssl rand -hex 24`
 
@@ -169,6 +161,8 @@ A self-hosted to-do list and project management app with kanban boards, reminder
 - **Requires:** Cloudflare network (`docker network create cloudflare`)
 - **Before deploying, set these values in the compose file:**
 
+- **Requires:** A `stack.env` file — in Portainer
+
 | Variable | What to set |
 |---|---|
 | `VIKUNJA_SERVICE_PUBLICURL` | Your server IP or domain, e.g. `http://192.168.1.100:3456` |
@@ -187,6 +181,20 @@ Run VS Code in your browser via [code-server](https://github.com/coder/code-serv
 - **Check your UID:GID** with `id YOUR_USERNAME` and update the `user:` field if needed (default is `1000:1000`)
 
 ---
+
+### Metabase
+
+**File:** `metabase.yaml`
+
+Query in natural language and give your team and customers AI-powered analytics built on your metrics and permissions.
+
+- **URL:** `http://YOUR_SERVER_IP:5432`
+- **Requires:** A `stack.env` file — in Portainer
+
+> Generate a strong DB password with: `openssl rand -hex 24`
+
+---
+
 
 ## 🔒 Security Notes
 
